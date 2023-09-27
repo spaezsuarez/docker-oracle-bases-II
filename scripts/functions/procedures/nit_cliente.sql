@@ -1,0 +1,11 @@
+CREATE OR REPLACE PROCEDURE PR_BUSCAR_RESERVA(PK_RESERVA IN RESERVA.K_RESERVA % TYPE)
+AS
+    if_reserva RESERVA.F_REVERSA%TYPE;
+    valor_reserva RESERVA.V_TOTAL%TYPE;
+BEGIN
+    select F_RESERVA,TOTAL INTO if_reserva,valor_reserva from RESERVA WHERE K_RESERVA = PK_RESERVA;
+    DBMS_OUTPUT.PUT_LINE('Datos de la reserva '||valor_reserva||', Fecha: '||if_reserva);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Reserva no encontrada: '||PK_RESERVA);
+END PR_BUSCAR_RESERVA;

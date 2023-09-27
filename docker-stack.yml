@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  app:
+    image: gvenzl/oracle-xe:21-slim
+    ports:
+      - 1521:1521
+    environment:
+      ORACLE_PASSWORD: pass
+    volumes:
+      - data:/opt/oracle/oradata
+      - './scripts/schema:/container-entrypoint-startdb.d/:ro'
+    deploy:
+      replicas: 1
+volumes:
+  data:
