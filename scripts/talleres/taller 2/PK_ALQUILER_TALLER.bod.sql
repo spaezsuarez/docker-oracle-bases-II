@@ -85,7 +85,7 @@ create or replace PACKAGE BODY PK_ALQUILER_TALLER AS
         pc_error := 0;
         pm_error := '';
         select * INTO l_cliente from cliente cl where cl.i_tipoid = pi_tipoid and cl.q_identificacion = pq_identificacion;
-        IF l_cliente IS NULL THEN
+        IF l_cliente.k_codcliente IS NULL THEN
             RAISE NO_DATA_FOUND;
         END IF;
         DBMS_OUTPUT.PUT_LINE('Cod cliente: '|| l_cliente.k_codcliente);
@@ -125,7 +125,7 @@ create or replace PACKAGE BODY PK_ALQUILER_TALLER AS
         INNER JOIN reserva r on vr.k_reserva = r.k_reserva  
         where vr.k_placa = pk_placa
         and r.f_reserva = pf_fecha;
-        IF lf_fecha_reserva = NULL THEN
+        IF lf_fecha_reserva IS NULL THEN
             RETURN TRUE;
         ELSE
             RETURN FALSE;
